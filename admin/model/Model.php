@@ -309,6 +309,24 @@
 	    	
 		}
 
+	    //Méthode pour ajouter envoyer une demande de maison
+	    public function sendDemand($id_maison,$nom,$telephone,$email,$message){
+
+	    	$query = "INSERT INTO demande (id_maison,nom,telephone,email,message,etat) VALUES (?,?,?,?,?,?)";
+
+	        $sql = $this->conn->prepare($query);
+
+	        if ($sql->execute(array($id_maison,$nom,$telephone,$email,$message,'non_lu'))) {          
+
+	        	return 1;
+
+	        }else {
+
+	        	return 2;
+	        }
+	    	
+		}
+
 
 
 

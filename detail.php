@@ -4,6 +4,7 @@
 
     $id = (($_GET['id'] > 0)?$_GET['id']:'');
 
+
     $list_maison = null;
     $list_maison = $model->getAllMaisonsById($id);
 
@@ -137,11 +138,11 @@
                             </div>
                         </div>
                         <div class="property-contactus">
-                            <h4>Contact Us</h4>
+                            <h4>Nous contacter</h4>
                             <div class="row">
                                 <div class="col-lg-5">
                                     <div class="agent-desc">
-                                        <img src="img/properties/agent-contact.jpg" alt="">
+                                        <img src="img/logo-blue.png" alt="">
                                         <div class="agent-title">
                                             <h5>Adam Smith</h5>
                                             <span>Saler Marketing</span>
@@ -152,101 +153,59 @@
                                             <a href="#"><i class="fa fa-google-plus"></i></a>
                                             <a href="#"><i class="fa fa-envelope"></i></a>
                                         </div>
-                                        <p>In today’s net-savvy world it has become common for any business to have a
-                                            website which they use mostly for advertising their products and services.
+                                        <p>Cpmlétez les champs du fomulaire pour nous faire part de vote besoin de location. 
+                                            Nous sommes à votre écoute 24/24 pour toute préocupation.
                                         </p>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 offset-lg-1">
-                                    <form action="#" class="agent-contact-form">
-                                        <input type="text" placeholder="Name*">
-                                        <input type="text" placeholder="Email">
-                                        <textarea placeholder="Messages"></textarea>
-                                        <button type="submit" class="site-btn">Send Message</button>
-                                    </form>
+                                    <form  class="agent-contact-form">
+                                        <input type="hidden" id="id_maison" value="<?php echo $idMaison ?>" placeholder="Id Maison*">
+                                        <input type="text" id="nom" placeholder="Nom*">
+                                        <input type="text" id="telephone" placeholder="Téléphone*">
+                                        <input type="email" id="email" placeholder="Email">
+                                        <textarea id="message" placeholder="Messages"></textarea>
+                                        <button type="button" id="envoyer_message" class="site-btn">Envoyer le message</button>
+                                    </form><br>
+                                    <div id="result">
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <div class="property-sidebar">
-                        <h4>Search Property</h4>
-                        <form action="#" class="sidebar-search">
-                            <div class="sidebar-btn">
-                                <div class="bt-item">
-                                    <input type="radio" name="s-type" id="st-buy" checked>
-                                    <label for="st-buy">Buy</label>
-                                </div>
-                                <div class="bt-item">
-                                    <input type="radio" name="s-type" id="st-rent">
-                                    <label for="st-rent">Rent</label>
-                                </div>
-                            </div>
-                            <select>
-                                <option value="">Locations</option>
-                            </select>
-                            <select>
-                                <option value="">Status</option>
-                            </select>
-                            <select>
-                                <option value="">No of Bedroom</option>
-                            </select>
-                            <select>
-                                <option value="">No of Bathrooms</option>
-                            </select>
-                            <select>
-                                <option value="">No of Guest</option>
-                            </select>
-                            <div class="room-size-range">
-                                <div class="price-text">
-                                    <label for="roomsizeRangeP">Size:</label>
-                                    <input type="text" id="roomsizeRangeP" readonly>
-                                </div>
-                                <div id="roomsize-range-P" class="slider"></div>
-                            </div>
-                            <div class="price-range-wrap">
-                                <div class="price-text">
-                                    <label for="priceRangeP">Price:</label>
-                                    <input type="text" id="priceRangeP" readonly>
-                                </div>
-                                <div id="price-range-P" class="slider"></div>
-                            </div>
-                            <button type="submit" class="search-btn">Search Property</button>
-                        </form>
-                        <div class="best-agents">
-                            <h4>Best Agents</h4>
-                            <a href="#" class="ba-item">
-                                <div class="ba-pic">
-                                    <img src="img/properties/best-agent-1.jpg" alt="">
+                    <div class="best-agents">
+                        <h4><b>Maisons Disponibles</b></h4><br>
+                        <?php 
+                            $list_maisonsLimit = $model->getAllMaisonsLimit($limit = 8);
+                            if (!empty($list_maisonsLimit)) {
+                                foreach($list_maisonsLimit as $res){
+                        ?>
+                        <div class="card p-2 mb-2">
+
+                        
+                            <a href="detail?id=<?php echo $res['id'] ?>" class="ba-item">
+                                <div class="" style="width:100%">
+                                    <img src="img/properties/<?php echo $res['image'] ?>" alt="">
                                 </div>
                                 <div class="ba-text">
-                                    <h5>Lester Bradley</h5>
-                                    <span>Company Agents</span>
-                                    <p class="property-items">6 property </p>
+                                    <h6><b><?php echo $res['titre_annonce'] ?></b></h6>
+                                    
+                                    <p class="property-items"><span><b><?php echo $res['prix'] ?> $</b></span> <?php echo $res['categorie'] ?> </p>
                                 </div>
-                            </a>
-                            <a href="#" class="ba-item">
-                                <div class="ba-pic">
-                                    <img src="img/properties/best-agent-2.jpg" alt="">
-                                </div>
-                                <div class="ba-text">
-                                    <h5>Janie Blair</h5>
-                                    <span>Company Agents</span>
-                                    <p class="property-items">6 property </p>
-                                </div>
-                            </a>
-                            <a href="#" class="ba-item">
-                                <div class="ba-pic">
-                                    <img src="img/properties/best-agent-3.jpg" alt="">
-                                </div>
-                                <div class="ba-text">
-                                    <h5>Sophia Cole</h5>
-                                    <span>Marketing & Ceo</span>
-                                    <p class="property-items">6 property </p>
-                                </div>
-                            </a>
-                        </div>
+                            </a></div>
+                        <?php  
+                                } 
+                            }else{
+                                echo'
+                                    <div class="text-center">
+                                        <h3>Aucune donné trouvée !</h3>
+                                    </div>
+                                ';
+                            }
+                        ?>
                     </div>
                 </div>
             </div>
@@ -364,6 +323,34 @@
     <script src="js/jquery-ui.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+
+    <script>
+        $("#envoyer_message").click(function(){
+            let id_maison = $("#id_maison").val();
+            let nom = $("#nom").val();
+            let telephone = $("#telephone").val();
+            let email = $("#email").val();
+            let message = $("#message").val();
+            let action = "send_demand";
+
+            $.ajax({
+              url:'actions_clients.php',
+              type:'post',
+              data:{
+                id_maison:id_maison,
+                nom:nom,
+                telephone:telephone,
+                email:email,
+                message:message,
+                action:action
+              },
+              success : function(data){
+                $("#result").html(data);
+              }
+            });
+
+        });
+    </script>
 </body>
 
 </html>
