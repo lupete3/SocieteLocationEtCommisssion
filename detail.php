@@ -193,7 +193,7 @@
                                 <div class="ba-text">
                                     <h6><b><?php echo $res['titre_annonce'] ?></b></h6>
                                     
-                                    <p class="property-items"><span><b><?php echo $res['prix'] ?> $</b></span> <?php echo $res['categorie'] ?> </p>
+                                    <p class="property-items"><span class="float-right"><b><?php echo $res['prix'] ?> $</b></span> <?php echo $res['categorie'] ?> </p>
                                 </div>
                             </a></div>
                         <?php  
