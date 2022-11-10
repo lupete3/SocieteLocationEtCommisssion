@@ -1,5 +1,9 @@
 <?php 
      include('model/security_adm.php');
+
+     require_once 'model/Model.php';
+    //Appel de la classe Model
+    $model = new Model;
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -142,38 +146,37 @@
                                 <ul class="show-notification">
                                     <li>
                                         <h6>Notifications</h6>
-                                        <label class="label label-danger">New</label>
+                                        <label class="label label-danger">Nouvelles</label>
                                     </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">John Doe</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-4.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Joseph William</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="waves-effect waves-light">
-                                        <div class="media">
-                                            <img class="d-flex align-self-center img-radius" src="assets/images/avatar-3.jpg" alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h5 class="notification-user">Sara Soudein</h5>
-                                                <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                <span class="notification-time">30 minutes ago</span>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    <?php
+                                        // code...
+                                        $list_demandes = $model->getNewDemands();
+
+                                        if ($list_demandes) {
+                                        foreach($list_demandes as $res){ ?>
+                                            <li class="waves-effect waves-light">
+                                                <div class="media">
+                                                    <img class="d-flex align-self-center img-radius" src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
+                                                    <div class="media-body">
+                                                        <h5 class="notification-user"><?php echo $res['nom'] ?></h5>
+                                                        <p class="notification-msg"><?php echo $res['message'] ?></p>
+                                                        <span class="notification-time"><?php echo $res['date_demande'] ?></span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            
+                                        <?php  
+                                        } 
+                                        }else{
+                                        echo'
+                                            <tr>
+                                            <td colspan="4" class="text-center" headers="">
+                                                <h3>Aucune nouvelle demande pour le moment !</h3>
+                                            </td>
+                                            </tr>
+                                        ';
+                                        }
+                                    ?>
                                 </ul>
                             </li>
                             <li class="user-profile header-notification">

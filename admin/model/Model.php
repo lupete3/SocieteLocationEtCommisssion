@@ -209,6 +209,25 @@
 	      	return $data;
 	    }
 
+	    //Méthode pour afficher toutes les nouvelles demandes envoyées par les clients
+	    public function getNewDemands(){
+
+	    	$data = null;
+
+	      	$query = "SELECT * FROM demande WHERE etat = ?";
+
+	      	$sql = $this->conn->prepare($query);
+
+	      	$sql->execute(array('non_lu'));
+
+	      	while($res = $sql->fetch(PDO::FETCH_ASSOC)){
+
+	        	$data[] = $res;
+	      	}
+
+	      	return $data;
+	    }
+
 	    //Méthode pour ajouter un pays dans la base de données
 	    public function addPays($designation){
 
