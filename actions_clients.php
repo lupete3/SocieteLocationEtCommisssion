@@ -13,7 +13,7 @@
         $nom = $_POST['nom'];
         $telephone = $_POST['telephone'];
         $email = ((empty($_POST['email']))?null:$_POST['email']);
-        $message = $_POST['message'];
+        $message = nl2br($_POST['message']);
 
         if ($delete_data = $model->sendDemand($id_maison,$nom,$telephone,$email,$message)) {
                 

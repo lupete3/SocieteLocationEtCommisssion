@@ -227,6 +227,44 @@
 
 	      	return $data;
 	    }
+		
+	    //Méthode pour afficher une seule demandes envoyées par le client
+	    public function getNewDemandsSingle($id){
+
+	    	$data = null;
+
+	      	$query = "SELECT a.id, a.date_demande, a.prenom, a.nom, a.email, a.telephone, a.motif, a.sexe, a.message, a.etat, a.id_maison, b.titre_annonce FROM demande as a, bien as b WHERE a.id_maison = b.id AND a.id = ?";
+
+	      	$sql = $this->conn->prepare($query);
+
+	      	$sql->execute(array($id));
+
+	      	while($res = $sql->fetch(PDO::FETCH_ASSOC)){
+
+	        	$data[] = $res;
+	      	}
+
+	      	return $data;
+	    }
+		
+	    //Méthode pour afficher les conversation selon une demande donnée 
+	    public function getReponseByComand($id){
+
+	    	$data = null;
+
+	      	$query = "SELECT * FROM reponse WHERE id_demande = ?";
+
+	      	$sql = $this->conn->prepare($query);
+
+	      	$sql->execute(array($id));
+
+	      	while($res = $sql->fetch(PDO::FETCH_ASSOC)){
+
+	        	$data[] = $res;
+	      	}
+
+	      	return $data;
+	    }
 
 	    //Méthode pour ajouter un pays dans la base de données
 	    public function addPays($designation){
@@ -336,6 +374,24 @@
 	        $sql = $this->conn->prepare($query);
 
 	        if ($sql->execute(array($id_maison,$nom,$telephone,$email,$message,'non_lu'))) {          
+
+	        	return 1;
+
+	        }else {
+
+	        	return 2;
+	        }
+	    	
+		}
+
+	    //Méthode pour ajouter envoyer une réponse dans la base de données 
+	    public function sendMessage($idDem,$type,$message){
+
+	    	$query = "INSERT INTO reponse (id_demande,type,message,etat) VALUES (?,?,?,?)";
+
+	        $sql = $this->conn->prepare($query);
+
+	        if ($sql->execute(array($idDem,$type,$message,'non_lu'))) {          
 
 	        	return 1;
 

@@ -155,25 +155,24 @@
                                         if ($list_demandes) {
                                         foreach($list_demandes as $res){ ?>
                                             <li class="waves-effect waves-light">
-                                                <div class="media">
-                                                    <img class="d-flex align-self-center img-radius" src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
-                                                    <div class="media-body">
-                                                        <h5 class="notification-user"><?php echo $res['nom'] ?></h5>
-                                                        <p class="notification-msg"><?php echo $res['message'] ?></p>
-                                                        <span class="notification-time"><?php echo $res['date_demande'] ?></span>
+                                                <a href="chats?id=<?php echo $res['id']?>">
+                                                    <div class="media">
+                                                        <img class="d-flex align-self-center img-radius" src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
+                                                        <div class="media-body">
+                                                            <h5 class="notification-user"><?php echo $res['nom'] ?></h5>
+                                                            <p class="notification-msg"><?php echo $res['message'] ?></p>
+                                                            <span class="notification-time"><?php echo $res['date_demande'] ?></span>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                </a>
                                             </li>
                                             
                                         <?php  
                                         } 
                                         }else{
                                         echo'
-                                            <tr>
-                                            <td colspan="4" class="text-center" headers="">
-                                                <h3>Aucune nouvelle demande pour le moment !</h3>
-                                            </td>
-                                            </tr>
+                                            <h3>Aucune nouvelle demande pour le moment !</h3>
+                                           
                                         ';
                                         }
                                     ?>
